@@ -1,0 +1,107 @@
+.community-page {
+    min-height: calc(100vh - 80px);
+    padding: 60px 0;
+  }
+  
+  .no-buddies {
+    text-align: center;
+    padding: 80px 40px;
+  }
+  
+  .no-buddies h2 {
+    font-size: 32px;
+    color: #FFD700;
+    margin-bottom: 20px;
+  }
+  
+  .no-buddies p {
+    font-size: 18px;
+    color: #cccccc;
+    margin-bottom: 40px;
+  }
+  
+  .buddies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+  }
+  
+  .buddy-card {
+    text-align: center;
+    padding: 35px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .buddy-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #FFD700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  }
+  
+  .buddy-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .buddy-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: #FFD700;
+    margin: 0;
+  }
+  
+  .buddy-stats {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(255, 215, 0, 0.05);
+    border-radius: 10px;
+  }
+  
+  .buddy-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .buddy-stat .stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #FFD700;
+  }
+  
+  .buddy-stat .stat-label {
+    font-size: 12px;
+    color: #999999;
+    text-transform: uppercase;
+  }
+  
+  .buddy-info {
+    width: 100%;
+    text-align: left;
+    color: #cccccc;
+    font-size: 14px;
+    line-height: 1.8;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+  }
+  
+  .you-badge {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    color: #1a1a1a;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }

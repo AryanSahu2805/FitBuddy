@@ -1,0 +1,136 @@
+.custom-workout-page {
+    min-height: calc(100vh - 80px);
+    padding: 60px 0;
+  }
+  
+  .custom-workout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .form-section {
+    padding: 40px;
+  }
+  
+  .section-title {
+    font-size: 28px;
+    color: #FFD700;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(255, 215, 0, 0.2);
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .schedule-builder {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .day-builder {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    border-radius: 12px;
+    padding: 25px;
+  }
+  
+  .day-builder-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+  }
+  
+  .day-builder-header h3 {
+    font-size: 20px;
+    color: #FFD700;
+    min-width: 120px;
+  }
+  
+  .day-focus-input {
+    flex: 1;
+  }
+  
+  .day-focus-input input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    font-size: 15px;
+  }
+  
+  .day-focus-input input:focus {
+    outline: none;
+    border-color: #FFD700;
+  }
+  
+  .exercises-builder {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 215, 0, 0.1);
+  }
+  
+  .exercises-builder h4 {
+    color: #FFA500;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  
+  .exercise-input-group {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: center;
+  }
+  
+  .exercise-input-group input {
+    padding: 10px 14px;
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    color: #ffffff;
+    font-size: 14px;
+  }
+  
+  .exercise-input-group input:focus {
+    outline: none;
+    border-color: #FFD700;
+  }
+  
+  .btn-remove-exercise {
+    background: rgba(255, 68, 68, 0.2);
+    border: 1px solid #ff4444;
+    color: #ff6666;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-remove-exercise:hover {
+    background: rgba(255, 68, 68, 0.3);
+    transform: scale(1.1);
+  }
+  
+  .btn-add-exercise {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }

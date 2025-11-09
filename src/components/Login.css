@@ -1,0 +1,124 @@
+.login-page {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: url('/assets/images/hero-banner.jpg') center/cover;
+    position: relative;
+  }
+  
+  .login-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 0;
+  }
+  
+  .login-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 450px;
+  }
+  
+  .login-card {
+    padding: 50px 40px;
+  }
+  
+  .login-title {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .login-subtitle {
+    text-align: center;
+    color: #cccccc;
+    margin-bottom: 40px;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .form-group label {
+    color: #FFD700;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 14px 18px;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #FFD700;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  
+  .form-group input::placeholder {
+    color: #888888;
+  }
+  
+  .input-error {
+    border-color: #ff4444 !important;
+  }
+  
+  .error-text {
+    color: #ff6666;
+    font-size: 13px;
+    margin-top: 5px;
+  }
+  
+  .btn-full {
+    width: 100%;
+    margin-top: 10px;
+    padding: 16px;
+    font-size: 18px;
+  }
+  
+  .login-footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #cccccc;
+  }
+  
+  .link-gold {
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  .link-gold:hover {
+    color: #FFA500;
+  }

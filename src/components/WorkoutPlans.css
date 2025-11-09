@@ -1,0 +1,138 @@
+.workout-plans-page {
+    min-height: calc(100vh - 80px);
+    padding: 60px 0;
+  }
+  
+  .page-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .page-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .page-subtitle {
+    font-size: 20px;
+    color: #cccccc;
+    margin-bottom: 30px;
+  }
+  
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 35px;
+  }
+  
+  .plan-card {
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid rgba(255, 215, 0, 0.2);
+    padding-bottom: 20px;
+  }
+  
+  .plan-name {
+    font-size: 28px;
+    font-weight: 700;
+    color: #FFD700;
+  }
+  
+  .plan-days {
+    background: rgba(255, 215, 0, 0.2);
+    color: #FFD700;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  .plan-description {
+    color: #cccccc;
+    line-height: 1.8;
+    font-size: 16px;
+  }
+  
+  .plan-schedule h3 {
+    color: #FFD700;
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+  
+  .schedule-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .schedule-list li {
+    color: #cccccc;
+    padding-left: 20px;
+    position: relative;
+  }
+  
+  .schedule-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #FFD700;
+    font-weight: bold;
+  }
+  
+  .day-name {
+    color: #FFD700;
+    font-weight: 600;
+  }
+  
+  .plan-stats {
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    background: rgba(255, 215, 0, 0.05);
+    border-radius: 10px;
+  }
+  
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+  }
+  
+  .stat-icon {
+    font-size: 30px;
+  }
+  
+  .stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #FFD700;
+  }
+  
+  .stat-label {
+    font-size: 13px;
+    color: #999999;
+    text-transform: uppercase;
+  }
+  
+  .plan-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: auto;
+  }

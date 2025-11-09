@@ -1,0 +1,142 @@
+.plan-details-page {
+    min-height: calc(100vh - 80px);
+    padding: 60px 0;
+  }
+  
+  .plan-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    padding: 40px;
+    background: rgba(255, 215, 0, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+  }
+  
+  .plan-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .plan-meta {
+    font-size: 18px;
+    color: #cccccc;
+  }
+  
+  .plan-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .plan-description-full {
+    padding: 40px;
+  }
+  
+  .plan-description-full h2 {
+    font-size: 32px;
+    color: #FFD700;
+    margin-bottom: 20px;
+  }
+  
+  .plan-description-full p {
+    color: #cccccc;
+    line-height: 1.8;
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+  
+  .plan-schedule-detailed {
+    padding: 40px;
+  }
+  
+  .plan-schedule-detailed h2 {
+    font-size: 32px;
+    color: #FFD700;
+    margin-bottom: 30px;
+  }
+  
+  .schedule-detailed-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .schedule-day-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    border-radius: 12px;
+    padding: 25px;
+  }
+  
+  .day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(255, 215, 0, 0.2);
+  }
+  
+  .day-header h3 {
+    font-size: 24px;
+    color: #FFD700;
+  }
+  
+  .day-focus {
+    background: rgba(255, 215, 0, 0.2);
+    color: #FFD700;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  .exercises-list h4 {
+    color: #FFA500;
+    margin-bottom: 12px;
+    font-size: 18px;
+  }
+  
+  .exercises-list ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .exercises-list li {
+    color: #cccccc;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.6;
+  }
+  
+  .exercises-list li::before {
+    content: '💪';
+    position: absolute;
+    left: 0;
+  }
+  
+  .plan-community-section {
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .plan-community-section h2 {
+    font-size: 32px;
+    color: #FFD700;
+    margin-bottom: 15px;
+  }
+  
+  .plan-community-section p {
+    color: #cccccc;
+    font-size: 18px;
+    margin-bottom: 25px;
+  }

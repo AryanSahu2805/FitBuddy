@@ -1,0 +1,157 @@
+.buddy-profile-page {
+    min-height: calc(100vh - 80px);
+    padding: 60px 0;
+  }
+  
+  .back-button {
+    margin-bottom: 30px;
+  }
+  
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 50px;
+    margin-bottom: 30px;
+  }
+  
+  .profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #FFD700;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+    flex-shrink: 0;
+  }
+  
+  .profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .profile-info {
+    flex: 1;
+  }
+  
+  .profile-name {
+    font-size: 42px;
+    font-weight: 700;
+    color: #FFD700;
+    margin-bottom: 10px;
+  }
+  
+  .profile-email {
+    font-size: 18px;
+    color: #cccccc;
+    margin-bottom: 8px;
+  }
+  
+  .profile-joined {
+    font-size: 16px;
+    color: #999999;
+  }
+  
+  .profile-stats {
+    padding: 40px;
+    margin-bottom: 30px;
+  }
+  
+  .profile-stats h2 {
+    font-size: 28px;
+    color: #FFD700;
+    margin-bottom: 30px;
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+  }
+  
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 30px;
+    background: rgba(255, 215, 0, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+  }
+  
+  .stat-icon {
+    font-size: 40px;
+  }
+  
+  .stat-card .stat-value {
+    font-size: 36px;
+    font-weight: 700;
+    color: #FFD700;
+  }
+  
+  .stat-card .stat-label {
+    font-size: 14px;
+    color: #999999;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+  .profile-workouts {
+    margin-top: 30px;
+  }
+  
+  .profile-workouts h2 {
+    font-size: 32px;
+    color: #FFD700;
+    margin-bottom: 30px;
+  }
+  
+  .no-workouts-text {
+    color: #cccccc;
+    font-size: 18px;
+    text-align: center;
+    padding: 40px;
+  }
+  
+  .workouts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .workout-preview {
+    padding: 30px;
+  }
+  
+  .workout-preview h3 {
+    font-size: 24px;
+    color: #FFD700;
+    margin-bottom: 15px;
+  }
+  
+  .workout-progress {
+    margin-top: 20px;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+  }
+  
+  .progress-text {
+    color: #cccccc;
+    font-size: 14px;
+  }
