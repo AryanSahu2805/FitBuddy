@@ -19,10 +19,20 @@ function PlanDetails() {
     try {
       const response = await fetch(`/api/plans/${planId}`);
       const data = await response.json();
-      setPlan(data);
+      
+      // Check if response has error message
+      if (data.message && data.message.includes('not connected')) {
+        console.error('Database not connected:', data.message);
+        setPlan(null);
+      } else if (response.ok) {
+        setPlan(data);
+      } else {
+        setPlan(null);
+      }
       setLoading(false);
     } catch (error) {
       console.error('Error fetching plan details:', error);
+      setPlan(null);
       setLoading(false);
     }
   };
@@ -43,6 +53,7 @@ function PlanDetails() {
           userId: user._id,
           planId: plan._id,
           planName: plan.name,
+          description: plan.description || plan.detailedDescription || '',
           schedule: plan.schedule,
         }),
       });

@@ -53,7 +53,12 @@ function Login() {
   };
 
   return (
-    <div className="login-page">
+    <div 
+      className="login-page"
+      style={{
+        backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/hero-banner.jpg)`
+      }}
+    >
       <div className="login-container">
         <div className="login-card card">
           <h1 className="login-title">Welcome Back</h1>

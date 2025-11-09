@@ -18,11 +18,24 @@ function Community() {
     try {
       const response = await fetch(`/api/community/${planId}`);
       const data = await response.json();
-      setBuddies(data.users);
-      setPlanName(data.planName);
+      
+      // Check if response has error message
+      if (data.message && data.message.includes('not connected')) {
+        console.error('Database not connected:', data.message);
+        setBuddies([]);
+        setPlanName('Workout Plan');
+      } else if (data.users && Array.isArray(data.users)) {
+        setBuddies(data.users);
+        setPlanName(data.planName || 'Workout Plan');
+      } else {
+        setBuddies([]);
+        setPlanName('Workout Plan');
+      }
       setLoading(false);
     } catch (error) {
       console.error('Error fetching community members:', error);
+      setBuddies([]);
+      setPlanName('Workout Plan');
       setLoading(false);
     }
   };
@@ -67,12 +80,12 @@ function Community() {
                   <p>Started: {new Date(buddy.startDate).toLocaleDateString()}</p>
                   <p>Active: {buddy.daysActive || 0} days</p>
                 </div>
-                {buddy._id !== user._id && (
+                {buddy._id.toString() !== user._id.toString() && (
                   <Link to={`/buddy/${buddy._id}`} className="btn btn-primary btn-full">
                     View Profile
                   </Link>
                 )}
-                {buddy._id === user._id && (
+                {buddy._id.toString() === user._id.toString() && (
                   <span className="you-badge">You</span>
                 )}
               </div>

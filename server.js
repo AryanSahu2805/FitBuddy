@@ -4,25 +4,47 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 7070; // use PORT from .env or default to 7070
+
+// Add debugging middleware
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
 app.use(express.json());
+
+// (Auth routes consolidated later under /api/auth)
 
 // MongoDB Connection
 let db;
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/fitbuddy';
 
-MongoClient.connect(mongoURI)
+// Connection options for better error handling
+const clientOptions = {
+  serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds
+  socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+};
+
+MongoClient.connect(mongoURI, clientOptions)
   .then(client => {
-    console.log('Connected to MongoDB');
+    console.log('✅ Connected to MongoDB successfully');
     db = client.db('fitbuddy');
     
     // Initialize default workout plans if none exist
     initializeDefaultPlans();
   })
-  .catch(error => console.error('MongoDB connection error:', error));
+  .catch(error => {
+    console.error('❌ MongoDB connection error:', error.message);
+    console.error('Please check your MongoDB connection string in .env file');
+    console.error('If using MongoDB Atlas, ensure your IP is whitelisted and connection string is correct');
+    // Server will still run but routes will return 503 until connection is established
+  });
 
 // Initialize default workout plans
 async function initializeDefaultPlans() {
@@ -250,6 +272,9 @@ async function initializeDefaultPlans() {
 // Register
 app.post('/api/auth/register', async (req, res) => {
   try {
+    if (!db) {
+      return res.status(503).json({ error: 'Database not connected. Please try again later.' });
+    }
     const { name, email, password } = req.body;
     
     const usersCollection = db.collection('users');
@@ -257,7 +282,7 @@ app.post('/api/auth/register', async (req, res) => {
     // Check if user already exists
     const existingUser = await usersCollection.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ error: 'User already exists' });
     }
 
     // Create new user (in production, hash the password!)
@@ -270,41 +295,32 @@ app.post('/api/auth/register', async (req, res) => {
 
     const result = await usersCollection.insertOne(newUser);
     
-    res.status(201).json({
-      user: {
-        _id: result.insertedId,
-        name,
-        email,
-      },
-    });
+    res.status(201).json({ success: true, user: { _id: result.insertedId, name, email } });
   } catch (error) {
     console.error('Registration error:', error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
 // Login
 app.post('/api/auth/login', async (req, res) => {
   try {
+    if (!db) {
+      return res.status(503).json({ error: 'Database not connected. Please try again later.' });
+    }
     const { email, password } = req.body;
     
     const usersCollection = db.collection('users');
     const user = await usersCollection.findOne({ email });
 
     if (!user || user.password !== password) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    res.json({
-      user: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-      },
-    });
+    res.json({ success: true, user: { _id: user._id, name: user.name, email: user.email } });
   } catch (error) {
     console.error('Login error:', error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
@@ -313,6 +329,9 @@ app.post('/api/auth/login', async (req, res) => {
 // Get all workout plans
 app.get('/api/plans', async (req, res) => {
   try {
+    if (!db) {
+      return res.status(503).json({ message: 'Database not connected. Please try again later.' });
+    }
     const plansCollection = db.collection('plans');
     const plans = await plansCollection.find({}).toArray();
     res.json(plans);
@@ -325,6 +344,9 @@ app.get('/api/plans', async (req, res) => {
 // Get single plan by ID
 app.get('/api/plans/:planId', async (req, res) => {
   try {
+    if (!db) {
+      return res.status(503).json({ message: 'Database not connected. Please try again later.' });
+    }
     const plansCollection = db.collection('plans');
     const plan = await plansCollection.findOne({ _id: new ObjectId(req.params.planId) });
     
@@ -344,6 +366,9 @@ app.get('/api/plans/:planId', async (req, res) => {
 // Get user workouts
 app.get('/api/user-workouts/:userId', async (req, res) => {
   try {
+    if (!db) {
+      return res.status(503).json({ message: 'Database not connected. Please try again later.' });
+    }
     const userWorkoutsCollection = db.collection('userWorkouts');
     const workouts = await userWorkoutsCollection
       .find({ userId: req.params.userId })
@@ -359,6 +384,9 @@ app.get('/api/user-workouts/:userId', async (req, res) => {
 // Create user workout
 app.post('/api/user-workouts', async (req, res) => {
   try {
+    if (!db) {
+      return res.status(503).json({ message: 'Database not connected. Please try again later.' });
+    }
     const userWorkoutsCollection = db.collection('userWorkouts');
     const workout = {
       ...req.body,
@@ -377,6 +405,9 @@ app.post('/api/user-workouts', async (req, res) => {
 // Delete user workout
 app.delete('/api/user-workouts/:workoutId', async (req, res) => {
   try {
+    if (!db) {
+      return res.status(503).json({ message: 'Database not connected. Please try again later.' });
+    }
     const userWorkoutsCollection = db.collection('userWorkouts');
     await userWorkoutsCollection.deleteOne({ _id: new ObjectId(req.params.workoutId) });
     res.status(204).send();
@@ -389,6 +420,9 @@ app.delete('/api/user-workouts/:workoutId', async (req, res) => {
 // Mark workout day as complete
 app.patch('/api/user-workouts/:workoutId/complete', async (req, res) => {
   try {
+    if (!db) {
+      return res.status(503).json({ message: 'Database not connected. Please try again later.' });
+    }
     const { dayIndex } = req.body;
     const userWorkoutsCollection = db.collection('userWorkouts');
     
@@ -414,11 +448,16 @@ app.patch('/api/user-workouts/:workoutId/complete', async (req, res) => {
   }
 });
 
+// (Do not start server here — final listen is at the end after all routes are registered)
+
 // ============= COMMUNITY ROUTES =============
 
 // Get community members for a plan
 app.get('/api/community/:planId', async (req, res) => {
   try {
+    if (!db) {
+      return res.status(503).json({ message: 'Database not connected. Please try again later.' });
+    }
     const userWorkoutsCollection = db.collection('userWorkouts');
     const usersCollection = db.collection('users');
     const plansCollection = db.collection('plans');
@@ -431,9 +470,28 @@ app.get('/api/community/:planId', async (req, res) => {
       .find({ planId: req.params.planId })
       .toArray();
 
-    const userIds = workouts.map(w => w.userId);
+    const userIds = workouts.map(w => w.userId).filter(id => id); // Filter out any null/undefined IDs
+    if (userIds.length === 0) {
+      return res.json({
+        planName: plan?.name || 'Workout Plan',
+        users: [],
+      });
+    }
+    
+    // Convert userIds to ObjectId, handling any invalid IDs
+    const validUserIds = userIds
+      .map(id => {
+        try {
+          return new ObjectId(id);
+        } catch (error) {
+          console.error(`Invalid userId: ${id}`, error);
+          return null;
+        }
+      })
+      .filter(id => id !== null);
+    
     const users = await usersCollection
-      .find({ _id: { $in: userIds.map(id => new ObjectId(id)) } })
+      .find({ _id: { $in: validUserIds } })
       .toArray();
 
     // Enrich user data with workout stats
@@ -443,8 +501,11 @@ app.get('/api/community/:planId', async (req, res) => {
       const totalDays = userWorkout ? userWorkout.schedule.length : 1;
       const consistency = Math.round((completedDays / totalDays) * 100);
       
+      // Remove password before sending to client
+      const { password, ...userWithoutPassword } = user;
+      
       return {
-        ...user,
+        ...userWithoutPassword,
         completedDays,
         consistency,
         startDate: userWorkout?.startDate || user.createdAt,
@@ -467,6 +528,9 @@ app.get('/api/community/:planId', async (req, res) => {
 // Get user by ID
 app.get('/api/users/:userId', async (req, res) => {
   try {
+    if (!db) {
+      return res.status(503).json({ message: 'Database not connected. Please try again later.' });
+    }
     const usersCollection = db.collection('users');
     const user = await usersCollection.findOne({ _id: new ObjectId(req.params.userId) });
     

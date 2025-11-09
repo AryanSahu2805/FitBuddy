@@ -69,7 +69,12 @@ function Register() {
   };
 
   return (
-    <div className="register-page">
+    <div 
+      className="register-page"
+      style={{
+        backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/hero-banner.jpg)`
+      }}
+    >
       <div className="register-container">
         <div className="register-card card">
           <h1 className="register-title">Join FitBuddy</h1>

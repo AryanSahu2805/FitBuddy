@@ -15,12 +15,26 @@ function MyWorkouts() {
 
   const fetchUserWorkouts = async () => {
     try {
+      if (!user || !user._id) {
+        setWorkouts([]);
+        setLoading(false);
+        return;
+      }
+      
       const response = await fetch(`/api/user-workouts/${user._id}`);
       const data = await response.json();
-      setWorkouts(data);
+      
+      // Check if response is successful and is an array
+      if (response.ok && Array.isArray(data)) {
+        setWorkouts(data);
+      } else {
+        console.error('Error fetching workouts:', data.message || 'Unknown error');
+        setWorkouts([]); // Set empty array to prevent map error
+      }
       setLoading(false);
     } catch (error) {
       console.error('Error fetching workouts:', error);
+      setWorkouts([]); // Set empty array to prevent map error
       setLoading(false);
     }
   };

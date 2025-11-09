@@ -16,10 +16,19 @@ function WorkoutPlans() {
     try {
       const response = await fetch('/api/plans');
       const data = await response.json();
-      setPlans(data);
+      
+      // Check if response is successful and is an array
+      if (response.ok && Array.isArray(data)) {
+        setPlans(data);
+      } else {
+        // Handle error response (e.g., database not connected)
+        console.error('Error fetching plans:', data.message || 'Unknown error');
+        setPlans([]); // Set empty array to prevent map error
+      }
       setLoading(false);
     } catch (error) {
       console.error('Error fetching plans:', error);
+      setPlans([]); // Set empty array to prevent map error
       setLoading(false);
     }
   };
@@ -41,8 +50,15 @@ function WorkoutPlans() {
           )}
         </div>
 
-        <div className="plans-grid">
-          {plans.map((plan) => (
+        {plans.length === 0 && !loading ? (
+          <div className="no-plans card">
+            <h2>No Workout Plans Available</h2>
+            <p>The database is not connected. Please check your MongoDB connection.</p>
+            <p>If you're using MongoDB Atlas, ensure your connection string is correct and your IP is whitelisted.</p>
+          </div>
+        ) : (
+          <div className="plans-grid">
+            {plans.map((plan) => (
             <div key={plan._id} className="plan-card card">
               <div className="plan-header">
                 <h2 className="plan-name">{plan.name}</h2>
@@ -87,7 +103,8 @@ function WorkoutPlans() {
               </div>
             </div>
           ))}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

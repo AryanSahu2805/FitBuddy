@@ -23,11 +23,24 @@ function BuddyProfile() {
       const userData = await userResponse.json();
       const workoutsData = await workoutsResponse.json();
 
-      setBuddy(userData);
-      setWorkouts(workoutsData);
+      // Check if responses are successful
+      if (userResponse.ok && !userData.message) {
+        setBuddy(userData);
+      } else {
+        setBuddy(null);
+      }
+      
+      if (workoutsResponse.ok && Array.isArray(workoutsData)) {
+        setWorkouts(workoutsData);
+      } else {
+        setWorkouts([]);
+      }
+      
       setLoading(false);
     } catch (error) {
       console.error('Error fetching buddy profile:', error);
+      setBuddy(null);
+      setWorkouts([]);
       setLoading(false);
     }
   };
