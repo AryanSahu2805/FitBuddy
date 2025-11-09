@@ -14,7 +14,7 @@ app.use(express.json());
 let db;
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/fitbuddy';
 
-MongoClient.connect(mongoURI, { useUnifiedTopology: true })
+MongoClient.connect(mongoURI)
   .then(client => {
     console.log('Connected to MongoDB');
     db = client.db('fitbuddy');
